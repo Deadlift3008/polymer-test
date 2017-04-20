@@ -1,0 +1,55 @@
+<dom-module id="register-modal">
+    <template>
+        <style>
+            button{
+                height: 40px;
+                font-size: 20px;
+                background-color: #fff;
+                box-shadow: 0 0 5px 1px rgba(0,0,0,.4);
+                border-radius: 5px;
+                cursor: pointer;
+                border: 1px solid rgba(0,0,0,.2);
+            }
+        </style>
+        <p>
+            <button>Register now!</button>
+            <modal-form></modal-form>
+        </p>
+    </template>
+    <script>
+        HTMLImports.whenReady(function(){
+            class RegisterModal extends Polymer.Element{
+                static get is(){return 'register-modal';}
+                connectedCallback() {
+                    super.connectedCallback();
+                    console.log('register-modal created!');
+                }
+            }
+
+            this.customElements.define(RegisterModal.is, RegisterModal);
+        });
+
+    </script>
+</dom-module>
+
+<dom-module id="modal-form">
+    <template>
+        <p>
+            Modal form!
+        </p>
+    </template>
+    <script>
+        HTMLImports.whenReady(function(){
+            class ModalForm extends Polymer.Element{
+                static get is(){return 'modal-form';}
+                connectedCallback() {
+                    super.connectedCallback();
+                    console.log('modal-form created!');
+                }
+            }
+
+            this.customElements.define(ModalForm.is, ModalForm);
+        });
+
+    </script>
+</dom-module>

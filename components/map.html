@@ -1,0 +1,21 @@
+<dom-module id="map-component">
+    <template>
+        <p>
+            MapComponent
+        </p>
+    </template>
+    <script>
+        HTMLImports.whenReady(function(){
+            class MapComponent extends Polymer.Element{
+                static get is(){return 'map-component';}
+                connectedCallback() {
+                    super.connectedCallback();
+                    console.log('map-component created!');
+                }
+            }
+
+            this.customElements.define(MapComponent.is, MapComponent);
+        });
+
+    </script>
+</dom-module>

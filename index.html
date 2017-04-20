@@ -1,15 +1,37 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="import" href="/bower_components/polymer/polymer-element.html">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="import" href="bower_components/polymer/polymer-element.html">
+    <link rel="import" href="components/main_info.html">
+    <link rel="import" href="components/register_modal.html">
+    <link rel="import" href="components/map.html">
+    <link rel="import" href="components/read_more.html">
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <title>Polymer test</title>
+    <dom-module id="app-element">
+        <script>
+            HTMLImports.whenReady(function(){
+                class App extends Polymer.Element{
+                    static get is(){return 'app-element';}
+                    connectedCallback() {
+                        super.connectedCallback();
+                        console.log('app-element created!');
+                    }
+                }
+
+                window.customElements.define(App.is, App);
+            });
+
+        </script>
+    </dom-module>
 </head>
 <body>
-
+    <app-element>
+        <main-info></main-info>
+        <register-modal></register-modal>
+        <read-more></read-more>
+        <map-component></map-component>
+    </app-element>
 </body>
 </html>
