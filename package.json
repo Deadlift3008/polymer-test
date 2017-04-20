@@ -1,0 +1,14 @@
+{
+  "name": "polymer-test",
+  "version": "1.0.0",
+  "description": "test task using polymer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Deadlift3008",
+  "license": "ISC",
+  "dependencies": {
+    "bower": "^1.8.0"
+  }
+}

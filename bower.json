@@ -1,0 +1,13 @@
+{
+  "name": "polymer-test",
+  "description": "test task using polymer",
+  "main": "index.js",
+  "authors": [
+    "Deadlift3008"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0-rc.3"
+  }
+}
