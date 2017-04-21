@@ -17,17 +17,17 @@
         </p>
     </template>
     <script>
-        HTMLImports.whenReady(function(){
-            class RegisterModal extends Polymer.Element{
-                static get is(){return 'register-modal';}
-                connectedCallback() {
-                    super.connectedCallback();
-                    console.log('register-modal created!');
-                }
-            }
 
-            this.customElements.define(RegisterModal.is, RegisterModal);
-        });
+        class RegisterModal extends Polymer.Element{
+            static get is(){return 'register-modal';}
+            connectedCallback() {
+                super.connectedCallback();
+                console.log('register-modal created!');
+            }
+        }
+
+        this.customElements.define(RegisterModal.is, RegisterModal);
+
 
     </script>
 </dom-module>
@@ -39,17 +39,17 @@
         </p>
     </template>
     <script>
-        HTMLImports.whenReady(function(){
-            class ModalForm extends Polymer.Element{
-                static get is(){return 'modal-form';}
-                connectedCallback() {
-                    super.connectedCallback();
-                    console.log('modal-form created!');
-                }
-            }
 
-            this.customElements.define(ModalForm.is, ModalForm);
-        });
+        class ModalForm extends Polymer.Element{
+            static get is(){return 'modal-form';}
+            connectedCallback() {
+                super.connectedCallback();
+                console.log('modal-form created!');
+            }
+        }
+
+        this.customElements.define(ModalForm.is, ModalForm);
+
 
     </script>
 </dom-module>

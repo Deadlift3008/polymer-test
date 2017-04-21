@@ -6,17 +6,17 @@
         </blockquote>
     </template>
     <script>
-        HTMLImports.whenReady(function(){
-            class ReadMore extends Polymer.Element{
-                static get is(){return 'read-more';}
-                connectedCallback() {
-                    super.connectedCallback();
-                    console.log('read-more created!');
-                }
-            }
 
-            this.customElements.define(ReadMore.is, ReadMore);
-        });
+        class ReadMore extends Polymer.Element{
+            static get is(){return 'read-more';}
+            connectedCallback() {
+                super.connectedCallback();
+                console.log('read-more created!');
+            }
+        }
+
+        this.customElements.define(ReadMore.is, ReadMore);
+
 
     </script>
 </dom-module>
@@ -26,17 +26,17 @@
         <p>Description</p>
     </template>
     <script>
-        HTMLImports.whenReady(function(){
-            class DescriptionComponent extends Polymer.Element{
-                static get is(){return 'description-component';}
-                connectedCallback() {
-                    super.connectedCallback();
-                    console.log('description-component created!');
-                }
-            }
 
-            this.customElements.define(DescriptionComponent.is, DescriptionComponent);
-        });
+        class DescriptionComponent extends Polymer.Element{
+            static get is(){return 'description-component';}
+            connectedCallback() {
+                super.connectedCallback();
+                console.log('description-component created!');
+            }
+        }
+
+        this.customElements.define(DescriptionComponent.is, DescriptionComponent);
+
 
     </script>
 </dom-module>
@@ -46,17 +46,17 @@
         <p>Video</p>
     </template>
     <script>
-        HTMLImports.whenReady(function(){
-            class VideoComponent extends Polymer.Element{
-                static get is(){return 'video-component';}
-                connectedCallback() {
-                    super.connectedCallback();
-                    console.log('video-component created!');
-                }
-            }
 
-            this.customElements.define(VideoComponent.is, VideoComponent);
-        });
+        class VideoComponent extends Polymer.Element{
+            static get is(){return 'video-component';}
+            connectedCallback() {
+                super.connectedCallback();
+                console.log('video-component created!');
+            }
+        }
+
+        this.customElements.define(VideoComponent.is, VideoComponent);
+
 
     </script>
 </dom-module>

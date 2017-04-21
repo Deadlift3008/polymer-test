@@ -3,20 +3,21 @@
     <template>
     <p>
         Main info
+        <register-modal></register-modal>
     </p>
     </template>
     <script>
-    HTMLImports.whenReady(function(){
-        class MainInfo extends Polymer.Element{
-            static get is(){return 'main-info';}
-            connectedCallback() {
-                super.connectedCallback();
-                console.log('main-info created!');
-            }
-        }
 
-        this.customElements.define(MainInfo.is, MainInfo);
-    });
+    class MainInfo extends Polymer.Element{
+        static get is(){return 'main-info';}
+        connectedCallback() {
+            super.connectedCallback();
+            console.log('main-info created!');
+        }
+    }
+
+    this.customElements.define(MainInfo.is, MainInfo);
+
 
     </script>
 </dom-module>

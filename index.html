@@ -8,6 +8,7 @@
     <link rel="import" href="components/map.html">
     <link rel="import" href="components/read_more.html">
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <title>Polymer test</title>
     <dom-module id="app-element">
         <script>
@@ -23,15 +24,16 @@
                 window.customElements.define(App.is, App);
             });
 
+            //212121 - цвет заднего фона
         </script>
     </dom-module>
 </head>
 <body>
     <app-element>
         <main-info></main-info>
-        <register-modal></register-modal>
         <read-more></read-more>
         <map-component></map-component>
     </app-element>
+
 </body>
 </html>
