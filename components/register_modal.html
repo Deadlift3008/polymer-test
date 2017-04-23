@@ -1,20 +1,19 @@
 <dom-module id="register-modal">
     <template>
         <style>
-            button{
+            .register__button{
                 height: 40px;
                 font-size: 20px;
-                background-color: #fff;
                 box-shadow: 0 0 5px 1px rgba(0,0,0,.4);
                 border-radius: 5px;
                 cursor: pointer;
                 border: 1px solid rgba(0,0,0,.2);
             }
         </style>
-        <p>
-            <button>Register now!</button>
+        <div class="register">
+            <div class="register__button">Register now!</div>
             <modal-form></modal-form>
-        </p>
+        </div>
     </template>
     <script>
 
@@ -42,10 +41,7 @@
 
         class ModalForm extends Polymer.Element{
             static get is(){return 'modal-form';}
-            connectedCallback() {
-                super.connectedCallback();
-                console.log('modal-form created!');
-            }
+
         }
 
         this.customElements.define(ModalForm.is, ModalForm);

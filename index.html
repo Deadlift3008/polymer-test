@@ -5,26 +5,34 @@
     <link rel="import" href="bower_components/polymer/polymer-element.html">
     <link rel="import" href="components/main_info.html">
     <link rel="import" href="components/register_modal.html">
-    <link rel="import" href="components/map.html">
+    <link rel="import" href="components/contacts.html">
     <link rel="import" href="components/read_more.html">
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <title>Polymer test</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background-color: #212121;
+            color: #fff;
+
+        }
+    </style>
     <dom-module id="app-element">
         <script>
             HTMLImports.whenReady(function(){
                 class App extends Polymer.Element{
                     static get is(){return 'app-element';}
-                    connectedCallback() {
-                        super.connectedCallback();
-                        console.log('app-element created!');
-                    }
                 }
 
                 window.customElements.define(App.is, App);
             });
 
-            //212121 - цвет заднего фона
         </script>
     </dom-module>
 </head>
@@ -32,7 +40,7 @@
     <app-element>
         <main-info></main-info>
         <read-more></read-more>
-        <map-component></map-component>
+        <contacts-component></contacts-component>
     </app-element>
 
 </body>

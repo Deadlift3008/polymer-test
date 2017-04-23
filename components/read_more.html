@@ -1,9 +1,7 @@
 <dom-module id="read-more">
     <template>
-        <blockquote>
-            <description-component></description-component>
-            <video-component></video-component>
-        </blockquote>
+        <description-component></description-component>
+        <video-component></video-component>
     </template>
     <script>
 
@@ -49,10 +47,7 @@
 
         class VideoComponent extends Polymer.Element{
             static get is(){return 'video-component';}
-            connectedCallback() {
-                super.connectedCallback();
-                console.log('video-component created!');
-            }
+
         }
 
         this.customElements.define(VideoComponent.is, VideoComponent);

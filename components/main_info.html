@@ -1,19 +1,26 @@
 
 <dom-module id="main-info">
     <template>
-    <p>
-        Main info
-        <register-modal></register-modal>
-    </p>
+        <style>
+
+        </style>
+        <div class="main-info">
+            <div class="main-info__wrap">
+                <div class="main-info__text">
+                    <h3 class="main-info__header main-info__header--h3">MIND GAMES</h3>
+                    <h2 class="main-info__header main-info__header--h2">KASPERSKY</h2>
+                    <h1 class="main-info__header">GEEK PICNIC</h1>
+                </div>
+                <register-modal></register-modal>
+                <div class="anchor-link to_read-more">read more</div>
+                <div class="anchor-link to_contacts">contacts</div>
+            </div>
+        </div>
     </template>
     <script>
 
     class MainInfo extends Polymer.Element{
         static get is(){return 'main-info';}
-        connectedCallback() {
-            super.connectedCallback();
-            console.log('main-info created!');
-        }
     }
 
     this.customElements.define(MainInfo.is, MainInfo);
