@@ -1,29 +1,98 @@
 
-<dom-module id="main-info">
+<dom-module id="main-info-component">
     <template>
         <style>
+            .main-info{
+                width: 100%;
+                height: 100vh;
+                background-image: url("../img/bg.jpg");
+                background-size: cover;
+                background-position: center center;
+            }
+
+            .main-info__wrap{
+                width: 85%;
+                margin-left: auto;
+                margin-right: auto;
+                position: relative;
+            }
+
+            .main-info__header{
+                margin: 0;
+            }
+
+            .main-info__logo{
+                position: absolute;
+                top: 25px;
+                right: 0;
+            }
+
+            .main-info__logo img{
+                width: 70px;
+                height: auto;
+            }
+
+            .main-info__header--h1{
+                font-size: 12vw;
+                margin-top: -1vw;
+            }
+
+            .main-info__header--h2{
+                font-size: 7vw;
+                margin-top: 30vh;
+            }
+
+            .main-info__header--h3{
+                font-size: 4vw;
+                padding-top: 20px;
+            }
+
+            .anchor-link{
+                font-size: 18px;
+                text-align: center;
+                color: #2c99c6;
+                cursor: pointer;
+                margin-top: 8px;
+            }
+
+            .anchor-link:hover{
+                text-decoration: underline;
+            }
+            
 
         </style>
         <div class="main-info">
             <div class="main-info__wrap">
+                <div class="main-info__logo">
+                    <img src="img/logo.png" alt="logo">
+                </div>
                 <div class="main-info__text">
                     <h3 class="main-info__header main-info__header--h3">MIND GAMES</h3>
                     <h2 class="main-info__header main-info__header--h2">KASPERSKY</h2>
-                    <h1 class="main-info__header">GEEK PICNIC</h1>
+                    <h1 class="main-info__header main-info__header--h1">GEEK PICNIC</h1>
                 </div>
                 <register-modal></register-modal>
-                <div class="anchor-link to_read-more">read more</div>
-                <div class="anchor-link to_contacts">contacts</div>
+                <div class="anchor-link to_read-more" on-click="scrollTo" data-dest="read-more-component">read more &#8595;</div>
+                <div class="anchor-link to_contacts" on-click="scrollTo" data-dest="contacts-component">contacts &#8595;</div>
             </div>
         </div>
     </template>
     <script>
 
-    class MainInfo extends Polymer.Element{
-        static get is(){return 'main-info';}
+    class MainInfoComponent extends Polymer.Element{
+        static get is(){return 'main-info-component';}
+        scrollTo(e){
+            if(!e.target.dataset.dest){
+                return;
+            }
+            var dest = e.target.dataset.dest;
+            $('html,body').stop().animate({ scrollTop: $(dest).offset().top }, 700);
+            e.preventDefault();
+
+        }
     }
 
-    this.customElements.define(MainInfo.is, MainInfo);
+    this.customElements.define(MainInfoComponent.is, MainInfoComponent);
 
 
     </script>

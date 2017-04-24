@@ -15,13 +15,29 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+
         }
 
         body{
             background-color: #212121;
             color: #fff;
-
+            overflow-x: hidden;
+            font-family: Arial, Tahoma, sans-serif;
         }
+
+        .ov-y-hide{
+            overflow-y: hidden;
+        }
+
+        .hover{
+            position: fixed;
+            z-index: 30;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,.7);
+            display: none;
+        }
+
     </style>
     <dom-module id="app-element">
         <script>
@@ -37,9 +53,10 @@
     </dom-module>
 </head>
 <body>
+    <div class="hover"></div>
     <app-element>
-        <main-info></main-info>
-        <read-more></read-more>
+        <main-info-component></main-info-component>
+        <read-more-component></read-more-component>
         <contacts-component></contacts-component>
     </app-element>
 
