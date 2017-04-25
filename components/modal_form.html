@@ -1,0 +1,276 @@
+<dom-module id="modal-form-component">
+    <template>
+        <style>
+
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .show{
+                display: block !important;
+                animation-duration: 0.6s;
+                animation-fill-mode: both;
+                animation-name: fadeInDown;
+            }
+
+
+            @keyframes fadeInDown {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -100%);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translate(-50%,-50%);
+                }
+            }
+
+            .modal-form{
+                position: fixed;
+                width: 100%;
+                max-width: 450px;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%,-50%);
+                background-color: #fff;
+                border-radius: 5px;
+                padding: 20px;
+                z-index: 50;
+                color: #000;
+                box-shadow: 0 0 8px 1px rgba(44,153,198,.5);
+                display: none;
+            }
+
+            .modal-form__input-text{
+                width: 100%;
+                border-radius: 3px;
+                border: 1px solid rgba(0,0,0,.5);
+                height: 50px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            input[type=submit]{
+                background-color: #2c99c6;
+                padding: 10px;
+                text-align: center;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 200px;
+                font-size: 20px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                border: 1px solid #2c99c6;
+                color: #fff;
+                margin-top: 20px;
+                transition: all .15s;
+            }
+
+            input[type=submit]:hover{
+                color: #2c99c6;
+                background-color: #fff;
+            }
+
+            h2{
+                margin-bottom: 10px;
+                margin-top: 10px;
+                font-size: 28px;
+                max-width: calc(100% - 40px);
+            }
+
+            input[type=checkbox]{
+                margin-top: 10px;
+            }
+
+            .modal-form__cross-wrap{
+                position: relative;
+            }
+
+            .modal-form__cross-wrap span{
+                display: block;
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                font-size: 30px;
+                color: #000;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .modal-form__message-output{
+                font-size: 15px;
+                color: red;
+                line-height: 1.5;
+                height: 30px;
+                padding-top: 10px;
+                width: 100%;
+
+            }
+
+            .error{
+                border: 1px solid red;
+                box-shadow: 0 0 4px 1px rgba(255,0,0,.3);
+            }
+
+            .success{
+                border: 1px solid #21d436;
+                box-shadow: 0 0 4px 1px rgba(33,212,54,.3);
+            }
+
+        </style>
+        <div class$="modal-form [[showClass]]">
+            <div class="modal-form__cross-wrap">
+                <span on-click="closeModal"> &#935;</span>
+            </div>
+            <h2>Registration on event</h2>
+            <form action="register/create" method="POST" name="registration" on-submit="submitHandler">
+                <input type="text" name="name" class="modal-form__input-text"
+                       placeholder="Your name" required data-field="name" on-input="inputHandler">
+                <input type="password" name="password" class="modal-form__input-text"
+                       placeholder="Password" required data-field="password" on-input="inputHandler" id="password">
+                <input type="password" name="password" class="modal-form__input-text"
+                       placeholder="Repeat password" required data-field="passCoincidence" on-input="inputHandler" id="password_repeat">
+                <input type="text" name="email" class="modal-form__input-text"
+                       placeholder="Email" required data-field="email" on-input="inputHandler">
+                <span>Remind me for a week about this event</span>
+                <input type="checkbox" name="remind">
+                <div class="modal-form__message-output" id="message_output"></div>
+                <input type="submit" value="submit">
+            </form>
+        </div>
+    </template>
+    <script>
+
+        class ModalFormComponent extends Polymer.Element{
+            static get is(){return 'modal-form-component';}
+            static get properties(){
+                return{
+                    showClass: {
+                        type: String,
+                        notify: true
+                    }
+                }
+            }
+            static get observers(){
+                return[
+                    '_obs(showClass)'
+                ]
+            }
+
+            constructor(){
+                super();
+                // result of check
+                this.fieldsCheck = {
+                    name: false,
+                    password: false,
+                    passCoincidence: false,
+                    email: false
+                };
+                // mask for check
+                this.fieldConfig = {
+                    name: /[a-zA-Z]{3,}/,
+                    password: /.{6,}/,
+                    email: /.{1,}@.{1,}\..{1,}/
+
+                };
+
+                // messages for user
+                this.messages = {
+                    name: "uncorrect format: required only letters, minimum 3 symbols",
+                    password: "required minimum 6 symbols",
+                    passCoincidence: "Password does not match",
+                    email: "uncorrect format. Example: name@gmail.com"
+                }
+
+
+
+            }
+            _obs(show){
+                if(show == "show"){
+                    document.querySelector(".hover").style.display = "block";
+                }else{
+                    document.querySelector(".hover").style.display = "none";
+
+                }
+
+            }
+            closeModal(){
+                this.set('showClass',"");
+            }
+            submitHandler(e){
+                e.preventDefault();
+                // check all fields
+                for(var prop in this.fieldsCheck){
+                    if(!this.fieldsCheck[prop]){
+                        this.$.message_output.textContent = "Fill all the fields correctly";
+                        return;
+                    }
+                }
+                e.target.submit();
+
+            }
+
+            inputHandler(e){
+                var field = e.target.dataset.field;
+                if(!field){
+                    return;
+                }
+
+                // if user returns change password after
+                // success passing password Coincidence
+                if(field == "password"){
+                    this.fieldsCheck.passCoincidence = false;
+                    if(this.$.password_repeat.classList.contains("success")){
+                        this.$.password_repeat.classList.remove("success");
+                    }
+                    this.$.password_repeat.classList.add("error");
+                }
+
+                var test,temp;
+
+                if(this.fieldConfig[field]){
+                    // test with regexp
+                    temp = e.target.value.match(this.fieldConfig[field]);
+                }else{
+                    // other type
+                    temp = this.$.password.value;
+                }
+
+                test = (temp == e.target.value);
+
+                this.notifyUser(e.target, test, field);
+
+            }
+            notifyUser(current,result,field){
+                // Notify user for result
+                if(!result){
+                    if(current.classList.contains("success")){
+                        current.classList.remove("success");
+                    }
+                    current.classList.add("error");
+                    this.$.message_output.textContent = this.messages[field];
+                }else{
+                    if(current.classList.contains("error")){
+                        current.classList.remove("error")
+                    }
+                    current.classList.add("success");
+                    this.$.message_output.textContent = "";
+                }
+
+
+                this.fieldsCheck[field] = result;
+            }
+
+        }
+
+        this.customElements.define(ModalFormComponent.is, ModalFormComponent);
+
+
+    </script>
+</dom-module>

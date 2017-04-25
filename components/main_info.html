@@ -86,10 +86,53 @@
                 return;
             }
             var dest = e.target.dataset.dest;
-            $('html,body').stop().animate({ scrollTop: $(dest).offset().top }, 700);
+            var top = document.querySelector(dest).getBoundingClientRect().top + pageYOffset;
+            this.scrollToValue(parseInt(top), 3, 10);
             e.preventDefault();
 
         }
+        scrollToValue(targetValue,step,delay){
+            step = step || 3;
+            delay = delay || 10;
+            targetValue = targetValue || 0;
+
+            var startValue = pageYOffset;
+            // define direction
+            var sign = (startValue > targetValue) ? -1 : 1;
+
+            //total distance to scroll
+            var diff = Math.abs(startValue - targetValue);
+
+            // tracing progress
+            var progress = 0;
+
+
+            var currentValue = startValue;
+            // start moving
+            var scr = setInterval(() => {
+
+                progress+=step*0.01;
+
+                // check endpoint
+                if(progress >= 1){
+                    window.scrollTo(0, targetValue);
+                    clearInterval(scr);
+                }
+
+                // change value
+                currentValue = startValue + diff*this.timingFunction(progress)*sign;
+
+                window.scrollTo(0, currentValue);
+
+            }, delay);
+
+
+        }
+        //for smooth animation
+        timingFunction(progress){
+            return 1 - Math.pow(1 - progress,2);
+        }
+
     }
 
     this.customElements.define(MainInfoComponent.is, MainInfoComponent);
