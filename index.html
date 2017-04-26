@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="bower_components/polymer/polymer-element.html">
     <link rel="import" href="components/main_info.html">
     <link rel="import" href="components/register_modal.html">
@@ -10,7 +11,18 @@
     <link rel="import" href="components/modal_form.html">
     <link rel="import" href="components/description.html">
     <link rel="import" href="components/video.html">
-    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+
+
+
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+    <link rel="import" href="bower_components/iron-collapse/iron-collapse.html">
+    <link rel="import" href="bower_components/paper-ripple/paper-ripple.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/google-youtube/google-youtube.html">
+
+
     <title>Polymer test</title>
     <style>
         *{
@@ -21,10 +33,10 @@
         }
 
         body{
-            background-color: #212121;
-            color: #fff;
+            background-color: #fff;
+            color: #000;
             overflow-x: hidden;
-            font-family: Arial, Tahoma, sans-serif;
+            font-family: 'Roboto', Tahoma, sans-serif;
         }
 
         .ov-y-hide{
@@ -39,6 +51,8 @@
             background-color: rgba(0,0,0,.7);
             display: none;
         }
+
+
 
 
     </style>
