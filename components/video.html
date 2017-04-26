@@ -9,9 +9,6 @@
             }
 
             google-youtube{
-                height: 500px;
-                width: 100%;
-                max-width: 1200px;
                 display: none;
                 opacity: 0;
                 position: absolute;
@@ -40,6 +37,8 @@
                 text-align: center;
                 margin-top: 20px;
                 z-index: 10;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             paper-button{
@@ -110,14 +109,12 @@
         </style>
         <div class="video" id="root">
             <paper-button raised on-click="showVideo">watch video</paper-button>
-            <!--iframe src="https://www.youtube.com/embed/-Vd83hJyAdc"
-                    allowfullscreen
-                    class$="{{open}}" id="video_container" on-animationend="setDisplay">
-            </iframe-->
             <google-youtube
-                    src="https://www.youtube.com/embed/-Vd83hJyAdc"
+                    video-id="-Vd83hJyAdc"
                     allowfullscreen
+                    class$="{{open}}"
                     id="video_container"
+                    height="500px"
                     on-animationend="setDisplay">
             </google-youtube>
             <div class="cross" id="cross" on-click="closeVideo">&#215;</div>
@@ -137,6 +134,17 @@
                         notify: true
                     }
                 }
+            }
+
+            connectedCallback(){
+                super.connectedCallback();
+                //set width video container
+                var width = document.documentElement.clientWidth;
+                if(width > 1200){
+                    width = 1200;
+                }
+
+                this.$.video_container.setAttribute("width",width + "px");
             }
             showVideo(){
                 this.set('open','open');
