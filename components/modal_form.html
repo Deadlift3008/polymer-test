@@ -134,41 +134,37 @@
             </div>
             <h2>Registration on event</h2>
             <form action="register/create" method="POST" name="registration" id="reg_form">
-                <!--input type="text" name="name" class="modal-form__input-text"
-                       placeholder="Your name" required data-field="name" on-input="inputHandler">
-                <input type="password" name="password" class="modal-form__input-text"
-                       placeholder="Password" required data-field="password" on-input="inputHandler" id="password">
-                <input type="password" name="password" class="modal-form__input-text"
-                       placeholder="Repeat password" required data-field="passCoincidence" on-input="inputHandler" id="password_repeat">
-                <input type="text" name="email" class="modal-form__input-text"
-                       placeholder="Email" required data-field="email" on-input="inputHandler"-->
                 <paper-input
                          label="Your name"
                          data-field="name"
-                         on-input="inputHandler">
+                         on-input="inputHandler"
+                         name="name">
                 </paper-input>
                 <paper-input
                         label="password"
                         type="password"
                         data-field="password"
                         on-input="inputHandler"
-                        id="password">
+                        id="password"
+                        name="password">
                 </paper-input>
                 <paper-input
                         label="Repeat password"
                         type="password"
                         data-field="passCoincidence"
                         on-input="inputHandler"
-                        id="password_repeat">
+                        id="password_repeat"
+                        name="password_repeat">
                 </paper-input>
                 <paper-input
                         label="Email"
                         data-field="email"
-                        on-input="inputHandler">
+                        on-input="inputHandler"
+                        name="email">
                 </paper-input>
                 <br>
                 <span>Remind me for a week about this event</span>
-                <paper-checkbox name="remind"></paper-checkbox>
+                <paper-checkbox name="remind" id="remind"></paper-checkbox>
                 <div class="modal-form__message-output" id="message_output"></div>
                 <paper-button raised on-click="submitHandler">submit</paper-button>
             </form>
@@ -240,6 +236,20 @@
                         return;
                     }
                 }
+
+                // without this, the value of checkbox
+                // is not sent
+
+                var remind = this.$.remind.active;
+                var checkbox = document.createElement("input");
+                checkbox.setAttribute("type","checkbox");
+                checkbox.setAttribute("name","remind");
+
+                checkbox.checked = remind;
+
+                this.$.reg_form.appendChild(checkbox);
+
+
                 this.$.reg_form.submit();
 
 
@@ -272,6 +282,7 @@
                 }
 
                 test = (temp == e.target.value);
+
 
                 this.notifyUser(e.target, test, field);
 
