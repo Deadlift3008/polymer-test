@@ -107,6 +107,12 @@
                 font-size: 16px;
             }
 
+            .preloader{
+                --paper-spinner-layer-1-color: #2c99c6;
+                --paper-spinner-layer-2-color: black;
+
+            }
+
             .error{
                 --paper-input-container-focus-color: red;
 
@@ -166,7 +172,8 @@
                 <span>Remind me for a week about this event</span>
                 <paper-checkbox name="remind" id="remind"></paper-checkbox>
                 <div class="modal-form__message-output" id="message_output"></div>
-                <paper-button raised on-click="submitHandler">submit</paper-button>
+                <paper-spinner class="preloader" id="preloader"></paper-spinner>
+                <paper-button raised on-click="submitHandler" id="submit">submit</paper-button>
             </form>
         </div>
     </template>
@@ -230,6 +237,9 @@
             }
             submitHandler(e){
                 // check all fields
+
+
+
                 for(var prop in this.fieldsCheck){
                     if(!this.fieldsCheck[prop]){
                         this.$.message_output.textContent = "Fill all the fields correctly";
@@ -237,26 +247,66 @@
                     }
                 }
 
-                // without this, the value of checkbox
-                // is not sent
-
-                var remind = this.$.remind.active;
-                var checkbox = document.createElement("input");
-                checkbox.setAttribute("type","checkbox");
-                checkbox.setAttribute("name","remind");
-
-                checkbox.checked = remind;
-
-                this.$.reg_form.appendChild(checkbox);
+                let form = new FormData();
+                form.append("remind",this.$.remind.active);
 
 
-                this.$.reg_form.submit();
+
+                let inputs = this.shadowRoot.querySelectorAll("paper-input");
+
+                inputs.forEach(function(item,i,arr){
+                    form.append(item.getAttribute("name"),item.value);
+                });
+
+                let request = new Promise((resolve, reject) => {
+                    let xhr = new XMLHttpRequest();
+                    let url = this.$.reg_form.getAttribute("action");
+                    let method = this.$.reg_form.getAttribute("method");
+                    xhr.open(method,url);
+
+                    this.setPreloader();
+
+                    xhr.send(form);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState != 4) return;
+                        if (xhr.status == 200) {
+                            resolve(xhr.responseText);
+                        } else {
+                            reject(xhr.status);
+                        }
+
+                    }
+
+
+                });
+
+
+                request
+                    .then((result) => {
+                        console.log(result);
+                        setTimeout(() => {
+                            this.delPreloader();
+                        },1500);
+                    },(error) => {
+                        console.error(error);
+                        setTimeout(() => {
+                            this.delPreloader();
+                            this.$.message_output.textContent = "error status: " + error;
+                        },1500);
+                    });
 
 
             }
-
+            setPreloader(){
+                this.$.submit.style.display = "none";
+                this.$.preloader.setAttribute("active","");
+            }
+            delPreloader(){
+                this.$.preloader.removeAttribute("active");
+                this.$.submit.style.display = "";
+            }
             inputHandler(e){
-                var field = e.target.dataset.field;
+                let field = e.target.dataset.field;
                 if(!field){
                     return;
                 }
@@ -271,7 +321,7 @@
                     this.$.password_repeat.classList.add("error");
                 }
 
-                var test,temp;
+                let test,temp;
 
                 if(this.fieldConfig[field]){
                     // test with regexp
